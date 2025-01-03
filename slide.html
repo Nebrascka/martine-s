@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow Background</title>
+    <link rel="stylesheet" href="slide.css">
+</head>
+<body>
+   
+    <script src="script.js"></script>
+</body>
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 3000); // Change slide every 3 seconds
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSlide(currentSlide);
+    });
+
+</script>
+</html>

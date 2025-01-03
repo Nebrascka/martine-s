@@ -14,44 +14,51 @@
 <body>
     <!-- Home -->
     <div class="home" id="home">
-        <div class="opac">
-            <div class="nav">
-                <div class="logo">
-                    <img src="logobgless.png">
-                </div>
-                <div class="nav-link">
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#menu1">Menu</a></li>
-                        <li><a href="new.html">Book A Seat</a></li>
-                    </ul>
-                </div>
-                <div class="nav-btn">
-                    <a href=""><button>Book Now</button></a>
-                </div>
+        <div class="slideshow-container">
+            <div class="slideshow">
+                <div class="slide" style="background-image: url('images/bg2.jpg');"></div>
+                <div class="slide" style="background-image: url('images/bg3.jpg');"></div>
+                <div class="slide" style="background-image: url('bg1.jpg');"></div>
             </div>
-            <div class="banner">
-                <span class="name">
-                    Martine's
-                </span>
-                <br>
-                <span class="title">
-                    BAR & <span class="grill">GRILL</span>
-                </span>
-                <p>Bold Flavors, Great Times, Every Visit</p>
+            <div class="opac">
+                <div class="nav">
+                    <div class="logo">
+                        <img src="logobgless.png">
+                    </div>
+                    <div class="nav-link">
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#menu1">Menu</a></li>
+                            <li><a href="slide.html">Book A Seat</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-btn">
+                        <a href=""><button>Book Now</button></a>
+                    </div>
+                </div>
+                <div class="banner">
+                    <span class="name">
+                        Martine's
+                    </span>
+                    <br>
+                    <span class="title">
+                        BAR & <span class="grill">GRILL</span>
+                    </span>
+                    <p>Bold Flavors, Great Times, Every Visit</p>
+            
+                    <div class="btn">
+                        <button>Book Now</button>
+                    </div>
+                </div>
+                <div class="scroller">
+                    <a href ="#about"><img src="browse arrow.svg"></a>
         
-                <div class="btn">
-                    <button>Book Now</button>
-                </div>
-            </div>
-            <div class="scroller">
-                <a href ="#about"><img src="browse arrow.svg"></a>
-    
-            </div>
+                </div>    
 
+            </div>
+            
         </div>
-
     </div>
     
     <!-- About -->
@@ -291,4 +298,29 @@
         </div>
     </div>
 </body>
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 3000); // Change slide every 3 seconds
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSlide(currentSlide);
+    });
+
+</script>
 </html>
