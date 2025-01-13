@@ -36,7 +36,7 @@ button{
     padding: 1rem 3rem;
     cursor: pointer;
     border-width: 0;
-    background-color: #08071c;
+    background-color: #132152;
     color: white;
 }
 button:hover{
@@ -51,7 +51,7 @@ button:hover{
     border-radius: 50%;
     width:4rem;
     height:4rem;
-    background-color: #08071c;
+    background-color: #132152;
    
 
 } 
@@ -70,12 +70,12 @@ button:hover{
     justify-content: space-around;
     gap: 2rem;
     list-style-type: none;
-    color: #08071c;
+    color: #132152;
     cursor: pointer;
    
 }
 .nav-link ul li a{
-    color: #08071c;
+    color: #132152;
 }
 .nav-link ul li a:hover{
     color: #8c8a2d;
@@ -86,7 +86,7 @@ button:hover{
     height: 100%;
     overflow: hidden;
     position: relative;
-    height: 100vh;
+    height: 105vh;
     width: 100%;
    
 }
@@ -96,7 +96,7 @@ button:hover{
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 105vh;
     overflow: hidden;
    
 }
@@ -121,7 +121,7 @@ button:hover{
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.384);
-    height: 100vh;
+    height: 105vh;
 }
 
 .banner{
@@ -142,16 +142,17 @@ button:hover{
     font-variation-settings: "wdth" 100;
     font-size: 3rem;
     text-align: center;
-    color: #08071c;
+    color: #132152;
 }
 .name{
     font-family: 'Gistesy', sans-serif;  
-    font-size: 8rem;       
+    font-size: 8rem;  
+    color: #132152;     
                                 
 
 }
 .grill{
-    color:#8c8a2d;
+    color:#132152;
 }
 .scroller{
     display: flex;
@@ -174,7 +175,7 @@ button:hover{
     font-style: normal;
     font-variation-settings: "wdth" 100;
     font-size: 4rem;
-    color: #08071c;
+    color: #132152;
     text-align: center;
    
 }
@@ -236,7 +237,7 @@ button:hover{
 }
 .description{
     text-align: center;
-    width:50rem;
+    max-width:50rem;
     margin: auto;
 }
 .items{
@@ -279,7 +280,7 @@ button:hover{
     display: flex;
     cursor: pointer;
     font-size: 2.2rem;
-    background: #000;
+    background: #132152;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -382,7 +383,7 @@ button:hover{
 
   /* Form */
 .form-space{
-    padding: 3rem;
+    padding: 4rem 3rem 1rem 3rem;
     text-align: left;
     margin: auto;
 }
@@ -400,7 +401,7 @@ button:hover{
     height: 2rem;
 }
 .names{
-    width: 15rem;
+   width:15rem;
     
 }
 .form-lables{
@@ -412,7 +413,7 @@ button:hover{
     border-radius: 50px;
     height: 3rem;
     cursor: pointer;
-    background-color: #08071c;
+    background-color: #132152;
     color: white;
     font-size: 15px;
     font-weight: bold;
@@ -420,7 +421,7 @@ button:hover{
 
 /* Footer */
 .footer{
-    background-color: #08071c;
+    background-color: #132152;
     height: 90vh;
 }
 .blue{
@@ -428,12 +429,8 @@ button:hover{
     padding: 0;
 }
 .title-c{
-    font-family: "Kalnia", serif;
-    font-optical-sizing: auto;
-    font-weight: bold;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
-    font-size: 4rem;
+    color: white;
+   
 }
 .big{
     text-align: left;
@@ -449,7 +446,7 @@ button:hover{
     color: #08071c;
     background-color: white;
     border-radius: 30px;
-    width: 15rem;
+    max-width: 15rem;
     height: 1.8rem;
     padding-top: 15px;
     cursor: pointer;
@@ -468,15 +465,18 @@ button:hover{
     font-style: normal;
     font-variation-settings: "wdth" 100;
     font-size: 2rem;
+    color: #132152;
 }
 .f-links{
     display: flex;
+    flex-wrap: wrap;
     gap: 7rem;
     padding-top: 2rem;
     color: #08071c;
 }
 .link-text{
     font-weight: bold;
+    color: #132152;
 }
 .location{
     padding: 2rem 0;
@@ -489,8 +489,14 @@ button:hover{
     color: #c8c1c1;
     cursor: pointer;
 }
+.breaker{
+    display: flex;
+    flex-direction: row;
+    gap:5rem;
+}
 .out{
     display: flex;
+    flex-wrap: wrap;
 }
 .out-links{
     justify-content: center;
@@ -573,7 +579,7 @@ button:hover{
 }
 
 @media (max-width:850px){
-    
+   
     .nav{
         gap:7rem;
     }
@@ -588,7 +594,54 @@ button:hover{
         align-self: flex-end;
         width: 14rem; 
     }
-    
+    .news{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    .news-head{
+        padding: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .details{
+        width: 100%;
+        height: 100vh;
+        align-items: center;
+
+    }
+    .form-space{
+       padding: 2rem ;
+    }
+    .entry{
+        width:100%;
+    }
+    .mail-form{
+        padding: 0 6rem;
+    }
+    .details-head{
+        text-align: center;
+    }
+    .user-name{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-text{
+        padding: 1rem;
+    }
+    .f-links{
+        padding-top: .2rem;
+        gap:4rem;
+    }
+    .out{
+        text-align: center;
+    }
+    .docs{
+        text-align: center;
+    }
+    .out-links{
+       gap:3rem;
+    }
 }
 @media (max-width:425px){
     .nav-link{
@@ -626,6 +679,15 @@ button:hover{
         align-self: flex-end;
       
         width: 12rem; 
+    }
+    .mail-form{
+        padding: 0 1.5rem;
+    }
+    .breaker{
+        gap:2rem;
+    }
+    .docs{
+        gap:1rem;
     }
 
 }
