@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Div on Hover</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .parent {
+      position: relative;
+      width: 200px;
+      height: 100px;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .child {
+      display: none;
+      position: absolute;
+      top: 100%; /* Positioned below the parent div */
+      left: 0;
+      width: 100%;
+      background-color: #f8f9fa;
+      color: black;
+      padding: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .parent:hover .child {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    Hover over me
+    <div class="child">
+      I appear when the parent is hovered!
+    </div>
+  </div>
+</body>
+</html>
