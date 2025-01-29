@@ -205,9 +205,7 @@ button:hover{
     padding: .5rem 0;
     /* height: 100vh; */
 }
-.intro{
-    padding-top: 2rem ;
-}
+
 .cats{
     display: flex;
     flex-direction: row;
@@ -230,9 +228,10 @@ button:hover{
      color:#8c8a2d;
 }
 .description{
-    text-align: center;
+    text-align: center justify;
     max-width:50rem;
     margin: auto;
+
 }
 .items{
     display: flex;
@@ -703,4 +702,28 @@ button:hover{
     .content{
         width:100%;
     }
+}
+
+
+/* Menu page */
+
+.menu-head{
+    text-align: center;
+}
+.menu-carrier{
+    padding: 3rem 3rem;
+    border-width: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+}
+.btn-carrier{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.active{
+    background-color: #8c8a2d;
+    color: white;
 }

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="logobgless.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link href="https://fonts.cdnfonts.com/css/bernier-distressed" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/gistesy" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="script.js" defer></script>
+  <title>Slideshow with Buttons</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: "Lexend Deca", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 5px;
+      font-style: normal;
+      font-size: 1rem;
+      margin: 0;
+
+    }
+    img{
+        height: 100%;
+        width: 100%;
+    }
+    button{
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 5px;
+    font-style: normal;
+    border-radius: 50px;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    border-width: 0;
+    background-color: #132152;
+    color: white;
+  }
+  button:hover{
+      background-color: #8c8a2d;
+      transition: .5s;
+    
+  }
+  .intro{
+    padding-top: 2rem ;
+    text-align: center;
+
+  }.title-b{
+    font-family: "Kalnia", serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 4rem;
+    color: #132152;
+    text-align: center;
+   
+  }
+.description{
+    text-align: justify;
+    max-width:50rem;
+    margin: auto;
+
+}
+
+  .menu-head{
+    text-align: center;
+  }
+    .menu-carrier{
+        padding: 3rem;
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .slideshow-container {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .slide {
+      display: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      border-radius: 10px;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- portable nav-bar -->
+  <div id="navbar-placeholder"></div>
+
+  <div class="menu-head">
+    <div class="intro">
+      <span class="title-b">
+          Our<span class="grill"> Menus</span>
+      </span>
+  
+      <div class="description">
+          <p>Indulge in a culinary journey that caters to every palate. Our menu is thoughtfully crafted to offer a delightful blend of classic favorites and innovative creations. Whether you're in the mood for hearty comfort food, light and refreshing options, or decadent desserts, we have something to satisfy every craving</p>
+      </div>
+    </div>
+  </div>
+
+    <div class="menu-carrier">
+        <div class="buttons">
+            <button data-target="image1">Restaurant Menu</button>
+            <button data-target="image2">Wine List</button>
+            <button data-target="image3">Special Menu</button>
+            <button data-target="image4">Valentine Menu</button>
+        </div>
+        <div class="slideshow-container">
+            <div class="slide active" id="image1">
+              <img src="images/restaurant menu.svg" alt="Image 1">
+            </div>
+            <div class="slide" id="image2">
+              <img src="images/winelist.svg" alt="Image 2">
+            </div>
+            <div class="slide" id="image3">
+              <img src="images/special menu.svg" alt="Image 3">
+            </div>
+            <div class="slide" id="image4">
+              <img src="images/valentine's menu.svg" alt="Image 2">
+            </div>
+        </div>
+    </div>
+  
+
+  <script>
+    // JavaScript for Slideshow Behavior
+    const buttons = document.querySelectorAll('.buttons button');
+    const slides = document.querySelectorAll('.slide');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Get the target slide ID from the button's data attribute
+        const targetId = button.getAttribute('data-target');
+
+        // Remove the 'active' class from all slides
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // Add the 'active' class to the target slide
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
