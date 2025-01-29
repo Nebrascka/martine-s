@@ -3,161 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
     <title>Document</title>
+    <style>
+        body {    
+            font-family: "Lexend Deca", sans-serif;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            font-family: "Lexend Deca", sans-serif;
+            border-radius: 50px;
+            padding: 1rem 3rem;
+            cursor: pointer;
+            border-width: 0;
+            background-color: #132152;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #8c8a2d;
+            transition: 0.5s;
+        }
+
+        .logo {
+            border-radius: 50%;
+            width: 4rem;
+            height: 4rem;
+            background-color: #132152;
+        } 
+
+        /* Navbar */
+        .nav {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-link ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link ul li a {
+            color: #132152;
+            font-weight: bold;
+        }
+
+        .nav-link ul li a:hover {
+            color: #8c8a2d;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: #132152;
+            transition: 0.3s;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-link {
+                position: absolute;
+                top: 15%;
+                left: 0;
+                width: 100%;
+                background-color: #8c8a2d;
+                flex-direction: column;
+                text-align: center;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease-in-out;
+                padding: 1rem 0;
+                display: none;
+            }
+
+            .nav-link ul {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .nav-link ul li {
+                padding: 10px 0;
+            }
+
+            .nav-link.show {
+                display: flex;
+                transform: translateY(0);
+            }
+
+            /* Hamburger Animation */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+    </style>
 </head>
-<style>
-    body{    
-        font-family: "Lexend Deca", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 5px;
-        font-style: normal;
-        font-size: 1rem;
-        margin: 0;
-
-    }
-    a{
-        text-decoration: none;
-    }
-    img{
-        width: 100%;
-        height:100%;
-    }
-
-    button{
-        font-family: "Lexend Deca", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 5px;
-        font-style: normal;
-        border-radius: 50px;
-        padding: 1rem 3rem;
-        cursor: pointer;
-        border-width: 0;
-        background-color: #132152;
-        color: white;
-    }
-    button:hover{
-        background-color: #8c8a2d;
-        transition: .5s;
-    
-    }
-    .logo{
-        
-        border-radius: 50%;
-        width:4rem;
-        height:4rem;
-        background-color: #132152;
-    
-
-    } 
-    .nav{
-        padding: 1rem ;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        text-align: center;
-        justify-content: space-between;
-        gap: 15rem;
-    }
-    .nav-link ul{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        gap: 2rem;
-        list-style-type: none;
-        color: #132152;
-        cursor: pointer;
-    
-    }
-    .nav-link ul li a{
-        color: #132152;
-    }
-    .nav-link ul li a:hover{
-        color: #8c8a2d;
-    }
-
-     /* Styles for mobile and tablets */
-  @media only screen and (max-width: 1023px) {
-    .slider-wrapper .slide-button {
-      display: none !important;
-    }
-    .slider-wrapper .image-list {
-      gap: 10px;
-      margin-bottom: 15px;
-      scroll-snap-type: x mandatory;
-    }
-    .slider-wrapper .image-list .image-item {
-      width: 280px;
-      height: 380px;
-    }
-    .slider-scrollbar .scrollbar-thumb {
-      width: 20%;
-    }
-  }
-
-/* mobile */
-@media (max-width:1024px){
-    body{
-        font-size: .8rem;
-    }
-    .nav{
-        gap:10rem;
-    }
-    .logo{
-        width: 3rem;
-        height: 3rem;
-    }
-    button{
-        padding: .5rem 1.5rem;
-    }
-    
-}
-
-@media (max-width:850px){
-   
-    .nav{
-        gap:7rem;
-    }
-    .logo{
-        width: 3rem;
-        height: 3rem;
-    }
-
-}
-@media (max-width:425px){
-    .nav-link{
-        display: none;
-    }
-    .nav-btn{
-        display: none;
-    }
-}
-@media (max-width:320px){
-    .nav-link{
-        display: none;
-    }
-    .nav-btn{
-        display: none;
-    }
-}
-
-
-</style>
 <body>
+
     <div class="nav">
         <div class="logo">
-            <img src="logobgless.png">
+            <img src="logobgless.png" alt="Logo">
         </div>
+
+        <button class="hamburger" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <div class="nav-link">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="test.html">About</a></li>
+                <li><a href="navbar.html">About</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="galery.html">Galery</a></li>
+                <li><a href="galery.html">Gallery</a></li>
             </ul>
         </div>
+
         <div class="nav-btn">
-            <a href=""><button>Book Now</button></a>
+            <a href="#"><button>Book Now</button></a>
         </div>
-    </div>    
+    </div>  
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("navbar.html")
+        .then(response => response.text())
+        .then(data => {
+            // Insert navbar HTML into the placeholder
+            document.getElementById("navbar-placeholder").innerHTML = data;
+
+            // Use a short timeout to ensure the navbar is fully rendered
+            setTimeout(() => {
+                setupHamburgerMenu();
+            }, 100);
+        })
+        .catch(error => console.error("Error loading the navbar:", error));
+});
+
+function setupHamburgerMenu() {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-link");
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("show");
+            hamburger.classList.toggle("active");
+        });
+    } else {
+        console.error("Hamburger menu elements not found.");
+    }
+}
+
+
+
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const hamburger = document.querySelector(".hamburger");
+        //     const navLinks = document.querySelector(".nav-link");
+
+        //     hamburger.addEventListener("click", function () {
+        //         navLinks.classList.toggle("show");
+        //         hamburger.classList.toggle("active");
+        //     });
+        // });
+    </script>  
+
 </body>
 </html>
