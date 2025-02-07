@@ -92,7 +92,6 @@ button:hover{
 .text{
     max-width: 50%;
     align-items: center;
-    padding: 4rem 0;
 }
 .btn{
     padding: 1rem 0;
@@ -172,4 +171,143 @@ button:hover{
 }
 .testimonial-text{
     font-size: 15px;
+}
+
+@media (max-width: 768px){
+    .content{
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 2rem 0;
+    }
+    .picture{
+        max-width: 100%;
+    }
+    .text{
+        max-width: 100%;
+    }
+    .team-details{
+        padding: 1rem 2rem;
+    }
+    .team-cards{
+        gap: 2rem;
+    }
+    .img-container{
+        width: 150px;
+        height: 150px;
+    }
+    .testimonial-content{
+        gap: 1rem;
+    }
+    .testimonial{
+        padding: 1rem;
+    }
+    .testimonial-img{
+        width: 50px;
+        height: 50px;
+    }
+    .testimonial-text{
+        font-size: 10px;
+    }
+    
+}
+@media screen and (max-width: 600px){
+    p{
+        font-size: 10px;
+    }
+    .description{
+        padding: 0 2rem;
+    }
+    .title{
+        font-size: 2rem;
+    }
+    .b{
+        font-size: 1.5rem;
+    }
+    .about-us{
+        padding: 1rem 2rem;
+    }
+    .content{
+        padding: 1rem 0;
+    }
+    .story{
+        padding: 1rem 0;
+    }
+    .team-details{
+        padding: 1rem 2rem;
+    }
+    .team-title{
+        font-size: 1.5rem;
+    }
+    .testimonial-content{
+        padding: 1rem 0;
+    }
+    .testimonial{
+        padding: 1rem;
+    }
+    .testimonial-text{
+        font-size: 10px;
+    }
+    .team-cards{
+        gap: 1rem;
+    }
+    .img-container{
+        width: 100px;
+        height: 100px;
+    }
+    .btn{
+        padding: 1rem 0;
+    }
+    .team{
+        padding: 1rem 2rem;
+    }
+    .team-cards{
+        gap: 1rem;
+    }
+    .team-title{
+        font-size: 1.5rem;
+    }
+    .testimonial-content{
+        padding: 1rem 0;
+    }
+    .testimonial{
+        padding: 1rem;
+    }
+    .testimonial-text{
+        font-size: 10px;
+    }
+    .team-cards{
+        gap: 1rem;
+    }
+    .img-container{
+        width: 100px;
+        height: 100px;
+    }
+    .btn{
+        padding: 1rem 0;
+    }
+    .team{
+        padding: 1rem 2rem;
+    }
+    .team-cards{
+        gap: 1rem;
+    }
+    .team-title{
+        font-size: 1.5rem;
+    }
+    .testimonial-content{
+        padding: 1rem 0;
+    }
+    .testimonial{
+        padding: 1rem;
+    }
+    .testimonial-text{
+        font-size: 10px;
+    }
+    .team-cards{
+        gap: 1rem;
+    }
+    .img-container{
+        width: 100px;
+        height: 100px;
+    }
 }
