@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+html{
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 5px;
+    font-style: normal;
+    font-size: 1rem;
+    margin: 0;
+
+  }
+  img{
+      height: 100%;
+      width: 100%;
+  }
+  button{
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 5px;
+  font-style: normal;
+  border-radius: 50px;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  border-width: 0;
+  background-color: #132152;
+  color: white;
+}
+button:hover{
+    background-color: #8c8a2d;
+    transition: .5s;
+  
+}
+.cover{
+    background-image: url(images/about\ bg.jpg);
+    background-position: center;
+    background-size: cover;
+    height:70vh;
+}
+.main{
+    background-color: rgba(255, 255, 255, 0.623);
+    z-index: 1;
+    height: 70vh;
+
+}
+
+.intro{
+    padding: 2rem 0;
+  text-align: center;
+  margin: auto;
+  
+}
+.description{
+    padding: 0 8rem;
+}
+.title{
+  font-family: "Kalnia", serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  font-size: 4rem;
+  color: #132152;
+  text-align: center;
+ 
+}
+.b{
+    font-size: 3rem;
+}
+.about-us{
+    padding: 2rem 3rem;
+}
+
+.content{
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.picture{
+    max-width: 50%;
+   
+}
+.picture img{
+    object-fit: cover;
+}
+
+.text{
+    max-width: 50%;
+    align-items: center;
+    padding: 4rem 0;
+}
+.btn{
+    padding: 1rem 0;
+}
+.story{
+    padding: 2rem 0rem;
+}
+
+/* Team */
+.team{
+    padding: 1rem 3rem;
+    text-align: center;
+    background-image: url("images/teambg3.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    /* height: 50vh; */
+}
+.team-details{
+    padding: 1rem 4rem;
+}
+.team-title{
+    color: white;
+}
+.team-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    padding: 2rem 0;
+}
+.team-card{
+    display: flex;
+    flex-direction: column;
+}
+.img-container{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Testimonials */
+.testimonials{
+    padding: 2rem 3rem;
+    text-align:center;
+}
+.testimonial-content{
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.testimonial{
+    text-align: center;
+    padding: 2rem 1rem;
+    max-width: 20rem;
+    border: 2px solid #132152;
+    border-radius: 10%;
+    cursor: pointer;
+}
+.testimonial:hover{
+    background-color: #132152;
+    color: white;
+    transition: .5s;
+    z-index: 100;
+}
+.testimonial-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    border: 2px solid #132152;
+}
+.testimonial-text{
+    font-size: 15px;
+}

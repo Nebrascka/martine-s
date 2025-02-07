@@ -46,40 +46,7 @@ button:hover{
 }
 
 /* nav */
-.logo{
-    
-    border-radius: 50%;
-    width:4rem;
-    height:4rem;
-    background-color: #132152;
-   
 
-} 
-.nav{
-    padding: 1rem ;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    gap: 15rem;
-}
-.nav-link ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    gap: 2rem;
-    list-style-type: none;
-    color: #132152;
-    cursor: pointer;
-   
-}
-.nav-link ul li a{
-    color: #132152;
-}
-.nav-link ul li a:hover{
-    color: #8c8a2d;
-}
 
 /* home */
 .slideshow-container {
@@ -191,7 +158,7 @@ button:hover{
     height:25vh;
     
 }
-.pic1 img{
+.pic1 img{ 
     object-fit: cover;
 }
 .pic2{
@@ -393,7 +360,7 @@ button:hover{
 /* Footer */
 .footer{
     background-color: #132152;
-    height: 90vh;
+    /* height: 90vh; */
 }
 .blue{
     color: white;

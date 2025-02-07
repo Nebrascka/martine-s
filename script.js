@@ -65,17 +65,25 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.text())
       .then(data => {
         document.getElementById("navbar-placeholder").innerHTML = data;
+
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-link");
+
+        hamburger.addEventListener("click", function () {
+            navLinks.classList.toggle("show");
+            hamburger.classList.toggle("active");
+        });
+
       })
       .catch(error => console.error("Error loading the navbar:", error));
-  });
+});
 
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-link");
-
-    hamburger.addEventListener("click", function () {
-        navLinks.classList.toggle("show");
-        hamburger.classList.toggle("active");
-    });
+// Footer reuse
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-placeholder").innerHTML = data;
+        })
+        .catch(error => console.error("Error loading the footer:", error));
 });

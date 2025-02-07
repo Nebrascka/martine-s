@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      
     <title>Document</title>
+    <script src="script.js" defer></script>
     <style>
         body {    
             font-family: "Lexend Deca", sans-serif;
@@ -131,6 +132,11 @@
                 transform: rotate(-45deg) translate(5px, -5px);
             }
         }
+        @media (max-width: 375px){
+            button{
+                padding: .5rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -149,9 +155,10 @@
         <div class="nav-link">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="navbar.html">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="galery.html">Gallery</a></li>
+                <li><a href="footer.html">foot</a></li>
             </ul>
         </div>
 
@@ -162,19 +169,8 @@
 
     <script>
 
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("navbar.html")
-        .then(response => response.text())
-        .then(data => {
-            // Insert navbar HTML into the placeholder
-            document.getElementById("navbar-placeholder").innerHTML = data;
-
-            // Use a short timeout to ensure the navbar is fully rendered
-            setTimeout(() => {
-                setupHamburgerMenu();
-            }, 100);
-        })
-        .catch(error => console.error("Error loading the navbar:", error));
+document.addEventListener("DOMContentLoaded", function () {
+    setupHamburgerMenu()
 });
 
 function setupHamburgerMenu() {
@@ -182,7 +178,7 @@ function setupHamburgerMenu() {
     const navLinks = document.querySelector(".nav-link");
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener("click", () => {
+        hamburger.addEventListener("click", function () {
             navLinks.classList.toggle("show");
             hamburger.classList.toggle("active");
         });
@@ -191,18 +187,6 @@ function setupHamburgerMenu() {
     }
 }
 
-
-
-
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     const hamburger = document.querySelector(".hamburger");
-        //     const navLinks = document.querySelector(".nav-link");
-
-        //     hamburger.addEventListener("click", function () {
-        //         navLinks.classList.toggle("show");
-        //         hamburger.classList.toggle("active");
-        //     });
-        // });
     </script>  
 
 </body>

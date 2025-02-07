@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+
+html{
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 5px;
+    font-style: normal;
+    font-size: 1rem;
+    margin: 0;
+
+  }
+  img{
+      height: 100%;
+      width: 100%;
+  }
+  .white{
+    background-color: white;
+  
+}
+.footer-text{
+    padding: 2rem 3rem;
+}
+.f-text{
+    font-family: "Kalnia", serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 2rem;
+    color: #132152;
+}
+.f-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7rem;
+    padding-top: 2rem;
+    color: #08071c;
+}
+.link-text{
+    font-weight: bold;
+    color: #132152;
+}
+.location{
+    padding: 2rem 0;
+
+}
+.f-links .menu-links ul{
+    text-align: left;
+    list-style-type: none;
+    padding: 0;
+    color: #c8c1c1;
+    cursor: pointer;
+}
+.breaker{
+    display: flex;
+    flex-direction: row;
+    gap:5rem;
+}
+.out{
+    display: flex;
+    flex-wrap: wrap;
+}
+.out-links{
+    justify-content: center;
+    gap: 10rem;
+    padding: 1rem 3rem;
+}
+.docs{
+    color: #a49999;
+    font-size: 10px;
+    gap: 2rem;
+}
+.copy{
+    cursor: pointer;
+}
+.social{
+    gap: 2rem;
+    align-items: center;
+}
+.media{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    color: #404040;
+}
+
+@media (max-width:850px){
+   
+    .footer-text{
+        padding: 1rem;
+    }
+    .f-links{
+        padding-top: .2rem;
+        gap:4rem;
+    }
+    .out{
+        text-align: center;
+    }
+    .docs{
+        text-align: center;
+    }
+    .out-links{
+       gap:3rem;
+    }
+}
+@media (max-width:600px){
+
+    .white{
+        text-align: center;
+        margin: auto;
+    }
+    .f-links{
+        justify-content: center;
+    }
+    .out{
+        justify-content: center;
+    }
+   
+    .breaker{
+        gap:2rem;
+    }
+    .docs{
+        gap:1rem;
+    }
+
+
+}
