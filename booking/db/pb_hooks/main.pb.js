@@ -1,3 +1,9 @@
+routerAdd("GET", "/", (e) => {
+  const html = $template.loadFiles(`${__hooks}/views/booking.html`).render();
+
+  return e.html(200, html);
+});
+
 onRecordCreateRequest((e) => {
   e.next();
 

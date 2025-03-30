@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Book a reservation</title>
-   <link rel="stylesheet" href="./public/css/style.css">
+   <link rel="stylesheet" href="./css/style.css">
    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
    <style>
       .invalid {
@@ -114,7 +114,7 @@
                   };
                   
                   const res = await fetch(
-                     'http://192.168.0.106:8090/api/collections/reservations_requests/records',
+                     '/api/collections/reservations_requests/records',
                      {
                         method: 'POST',
                         body: JSON.stringify(reservation),
