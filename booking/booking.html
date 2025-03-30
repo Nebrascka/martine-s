@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Book a reservation</title>
+   <link rel="stylesheet" href="./public/css/style.css">
+   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+   <style>
+      .invalid {
+         border: 2px solid #ff3860 !important;
+         background-color: #fff5f7;
+      }
+
+      .valid {
+         border: 2px solid #23d160 !important;
+         background-color: #f6fef9;
+      }
+
+      small {
+         font-size: 0.8em;
+         margin-top: 4px;
+         display: block;
+      }
+
+      .form-control {
+         margin-bottom: 1rem;
+      }
+   </style>
+</head>
+
+<body>
+   <section class="header">
+      <h1>Martine's</h1>
+   </section>
+   <section class="form-section">
+      <div class="form-header">
+         <h3>Request Reservation</h3>
+         <p>Add your details to request a reservation with us. We get back to you within 2-3 business days regarding the
+            status of your request.</p>
+      </div>
+      <form id="reservationForm" class="request-form" method="post" x-data="{
+         first_name: '',
+         last_name: '',
+         email: '',
+         phone_number: '',
+         event: '',
+         date: '',
+         event_description: '',
+         adults: 1,
+         hasChildren: false,
+         children: 1,
+         hasAllergy: false,
+         allergy_description: '',
+         hasDisability: false,
+         disability_description: '',
+         special_instructions: '',
+         
+         // Validation states
+         firstNameValid: false,
+         lastNameValid: false,
+         emailValid: false,
+         phoneValid: true, // Optional field
+         eventNameValid: false,
+         dateValid: false,
+         
+         // Validation methods
+         validateName(name) {
+            return /^[A-Za-z]{2,50}$/.test(name);
+         },
+         validateEmail(email) {
+            return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+         },
+         validatePhone(phone) {
+            return phone === '' || /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(phone);
+         },
+         validateEventName(name) {
+            return /^[A-Za-z0-9\s\-',]{2,100}$/.test(name);
+         },
+         validateDate(date) {
+            return date !== '';
+         },
+         
+         // Form submission handler
+         async submitForm() {
+            this.firstNameValid = this.validateName(this.first_name);
+            this.lastNameValid = this.validateName(this.last_name);
+            this.emailValid = this.validateEmail(this.email);
+            this.phoneValid = this.validatePhone(this.phone_number);
+            this.eventNameValid = this.validateEventName(this.event);
+            this.dateValid = this.validateDate(this.date);
+            
+            if(this.firstNameValid && this.lastNameValid && this.emailValid && this.phoneValid && this.eventNameValid && this.dateValid) {
+               try {
+                  console.log('Submitting reservation request to PocketBase');
+                  
+                  const reservation = {
+                     first_name: this.first_name,
+                     last_name: this.last_name,
+                     email: this.email,
+                     phone_number: this.phone_number,
+                     event: this.event,
+                     date: this.date,
+                     event_description: this.event_description,
+                     adults: this.adults,
+                     hasChildren: this.hasChildren,
+                     children: this.hasChildren ? this.children : 0,
+                     hasAllergy: this.hasAllergy,
+                     allergy_description: this.hasAllergy ? this.allergy_description : '',
+                     hasDisability: this.hasDisability,
+                     disability_description: this.hasDisability ? this.disability_description : '',
+                     special_instructions: this.special_instructions
+                  };
+                  
+                  const res = await fetch(
+                     'http://192.168.0.106:8090/api/collections/reservations_requests/records',
+                     {
+                        method: 'POST',
+                        body: JSON.stringify(reservation),
+                        headers: {
+                           'Content-Type': 'application/json',
+                        },
+                     }
+                  );
+                  
+                  if (!res.ok) {
+                     throw res;
+                  }
+                  
+                  const data = await res.json();
+                  console.log('Reservation submitted successfully:', data);
+                  
+                  // Reset form
+                  this.first_name = '';
+                  this.last_name = '';
+                  this.email = '';
+                  this.phone_number = '';
+                  this.event = '';
+                  this.date = '';
+                  this.event_description = '';
+                  this.adults = 1;
+                  this.hasChildren = false;
+                  this.children = 1;
+                  this.hasAllergy = false;
+                  this.allergy_description = '';
+                  this.hasDisability = false;
+                  this.disability_description = '';
+                  this.special_instructions = '';
+                  
+                  // Show success message
+                  alert('Reservation request submitted successfully! We will get back to you within 2-3 business days.');
+                  
+               } catch (err) {
+                  //const message = await err.text();
+                  console.error('Error submitting reservation:', err);
+               }
+            }
+         }
+      }" @submit.prevent="submitForm">
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>User Information</h3>
+               <p>Enter your details to create a reservation</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-row">
+                  <div class="form-control">
+                     <label for="firstName">First Name*</label>
+                     <input type="text" name="firstName" id="firstName" x-model="first_name"
+                        @input="firstNameValid = validateName(first_name)"
+                        :class="{ 'invalid': first_name && !firstNameValid, 'valid': first_name && firstNameValid }">
+                     <small x-show="first_name && !firstNameValid" style="color: red;">Please enter a valid name
+                        (letters, spaces, hyphens, apostrophes only)</small>
+                  </div>
+                  <div class="form-control">
+                     <label for="lastName">Last Name*</label>
+                     <input type="text" name="lastName" id="lastName" x-model="last_name"
+                        @input="lastNameValid = validateName(last_name)"
+                        :class="{ 'invalid': last_name && !lastNameValid, 'valid': last_name && lastNameValid }">
+                     <small x-show="last_name && !lastNameValid" style="color: red;">Please enter a valid name (letters,
+                        spaces, hyphens, apostrophes only)</small>
+                  </div>
+               </div>
+               <div class="form-control">
+                  <label for="email">Email*</label>
+                  <input type="email" name="email" id="email" x-model="email" @input="emailValid = validateEmail(email)"
+                     :class="{ 'invalid': email && !emailValid, 'valid': email && emailValid }">
+                  <small x-show="email && !emailValid" style="color: red;">Please enter a valid email address</small>
+               </div>
+               <div class="form-control">
+                  <label for="phoneNumber">Phone Number</label>
+                  <input type="tel" name="phoneNumber" id="phoneNumber" x-model="phone_number"
+                     @input="phoneValid = validatePhone(phone_number)"
+                     :class="{ 'invalid': phone_number && !phoneValid, 'valid': phone_number && phoneValid }">
+                  <small x-show="phone_number && !phoneValid" style="color: red;">Please enter a valid phone number
+                     (e.g., 123-456-7890)</small>
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Event Information</h3>
+               <p>Enter details about the occasion</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-control">
+                  <label for="eventName">Event Name*</label>
+                  <input type="text" name="eventName" id="eventName" x-model="event"
+                     @input="eventNameValid = validateEventName(event)"
+                     :class="{ 'invalid': event && !eventNameValid, 'valid': event && eventNameValid }">
+                  <small x-show="event && !eventNameValid" style="color: red;">Please enter a valid event name (2-100
+                     characters)</small>
+               </div>
+               <div class="form-control">
+                  <label for="eventDate">Date*</label>
+                  <input type="date" name="eventDate" id="eventDate" x-model="date"
+                     @input="dateValid = validateDate(date)"
+                     :class="{ 'invalid': date !== undefined && !dateValid, 'valid': date && dateValid }">
+                  <small x-show="date !== undefined && !dateValid" style="color: red;">Please select a date</small>
+               </div>
+               <div class="form-control">
+                  <label for="eventDescription">Event Description</label>
+                  <textarea name="eventDescription" id="eventDescription" rows="10"
+                     x-model="event_description"></textarea>
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Guest Information</h3>
+               <p>Enter details about the guests</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-control">
+                  <label for="numAdults">Number of Adults</label>
+                  <input type="number" name="numAdults" id="numAdults" min="1" value="1" x-model="adults">
+               </div>
+               <div class="form-row">
+                  <input type="checkbox" name="hasChildren" id="hasChildren" x-model="hasChildren">
+                  <label for="hasChildren"> I have Children</label>
+               </div>
+               <div class="form-control" x-show="hasChildren">
+                  <label for="numChildren">Number of Children</label>
+                  <input type="number" name="numChildren" id="numChildren" min="0" value="0" x-model="children">
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Additional Information</h3>
+               <p>These details help us make your experience better.</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-row">
+                  <input type="checkbox" name="hasAllergy" id="hasAllergy" x-model="hasAllergy">
+                  <label for="hasAllergy"> One or more guests have an allergy</label>
+               </div>
+               <div class="form-control" x-show="hasAllergy">
+                  <label for="allergyDescription">Please Specify</label>
+                  <input type="text" name="allergyDescription" id="allergyDescription" x-model="allergy_description">
+               </div>
+               <div class="form-row">
+                  <input type="checkbox" name="hasDisability" id="hasDisability" x-model="hasDisability">
+                  <label for="hasDisability"> One or more guests have a disability</label>
+               </div>
+               <div class="form-control" x-show="hasDisability">
+                  <label for="disabilityDescription">Please Specify</label>
+                  <input type="text" name="disabilityDescription" id="disabilityDescription"
+                     x-model="disability_description">
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Special Instructions</h3>
+               <p>Leave special instructions on how to handle your reservation.</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-control">
+                  <label for="specialInstructions">Special Instructions</label>
+                  <textarea name="specialInstructions" id="specialInstructions" rows="10"
+                     x-model="special_instructions"></textarea>
+               </div>
+            </div>
+         </div>
+         <div class="form-control form-action">
+            <input type="submit" name="submit" value="Request Reservation"
+               x-bind:disabled="!(firstNameValid && lastNameValid && emailValid && phoneValid && eventNameValid && dateValid) && (first_name || last_name || email || phone_number || event || date)">
+            <div
+               x-show="!(firstNameValid && lastNameValid && emailValid && phoneValid && eventNameValid && dateValid) && (first_name || last_name || email || phone_number || event || date)"
+               style="color: red; margin-top: 10px;">
+               Please fix the highlighted fields before submitting
+            </div>
+         </div>
+      </form>
+   </section>
+</body>
+
+</html>
