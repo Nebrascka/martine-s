@@ -11,13 +11,13 @@ ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/po
 RUN unzip /tmp/pb.zip -d /pb/
 
 # copy the local pb_migrations dir into the image
-COPY ./db/pb_migrations /pb/pb_migrations
+COPY ./booking/db/pb_migrations /pb/pb_migrations
 
 # uncomment to seed with local data !! DO THIS ONLY ONCE !!
 # COPY ./db/pb_data /pb/pb_data
 
 # copy the local pb_hooks dir into the image
-COPY ./db/pb_hooks /pb/pb_hooks
+COPY ./booking/db/pb_hooks /pb/pb_hooks
 
 EXPOSE 8080
 
