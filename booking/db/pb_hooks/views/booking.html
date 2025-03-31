@@ -11,14 +11,14 @@
 </head>
 
 <body>
-   <section class="header">
+   <section class="header josefin-sans-regular">
       <h1>Martine's</h1>
    </section>
    <section class="form-section">
       <div class="form-header">
-         <h3>Request Reservation</h3>
-         <p>Add your details to request a reservation with us. We get back to you within 2-3 business days regarding the
-            status of your request.</p>
+         <h2 class="josefin-sans-regular">Request Reservation</h2>
+         <p class="libre-baskerville-regular">Add your details to request a reservation with us. We get back to you within 2-3
+            business days regarding the status of your request.</p>
       </div>
       
       <!-- Success message that appears after form submission -->
@@ -30,11 +30,12 @@
             <button @click="resetForm" class="btn">Make Another Reservation</button>
          </div>
       </div>
-      <form id="reservationForm" class="request-form" method="post" x-data="reservationPage" @submit.prevent="submitForm">
-         <div class="form-group">
+      <form id="reservationForm" class="request-form josefin-sans-regular" method="post" x-data="reservationPage"
+         @submit.prevent="submitForm">
+         <div class="form-group" x-show="activeFormPage.id == 0">
             <div class="form-group-title">
                <h3>User Information</h3>
-               <p>Enter your details to create a reservation</p>
+               <p class="libre-baskerville-regular subtitle">Enter your details to create a reservation</p>
             </div>
             <div class="form-group-content">
                <div class="form-row">
@@ -71,10 +72,10 @@
                </div>
             </div>
          </div>
-         <div class="form-group">
+         <div class="form-group" x-show="activeFormPage.id == 1">
             <div class="form-group-title">
                <h3>Event Information</h3>
-               <p>Enter details about the occasion</p>
+               <p class="libre-baskerville-regular subtitle">Enter details about the occasion</p>
             </div>
             <div class="form-group-content">
                <div class="form-control">
@@ -99,10 +100,10 @@
                </div>
             </div>
          </div>
-         <div class="form-group">
+         <div class="form-group" x-show="activeFormPage.id == 2">
             <div class="form-group-title">
                <h3>Guest Information</h3>
-               <p>Enter details about the guests</p>
+               <p class="libre-baskerville-regular subtitle">Enter details about the guests</p>
             </div>
             <div class="form-group-content">
                <div class="form-control">
@@ -119,13 +120,13 @@
                </div>
             </div>
          </div>
-         <div class="form-group">
+         <div class="form-group" x-show="activeFormPage.id == 3">
             <div class="form-group-title">
                <h3>Additional Information</h3>
-               <p>These details help us make your experience better.</p>
+               <p class="libre-baskerville-regular subtitle">These details help us make your experience better.</p>
             </div>
             <div class="form-group-content">
-               <div class="form-row">
+               <div class="form-row" style="margin-bottom: 0.4rem;">
                   <input type="checkbox" name="hasAllergy" id="hasAllergy" x-model="hasAllergy" @change="saveFormData()">
                   <label for="hasAllergy"> One or more guests have an allergy</label>
                </div>
@@ -134,7 +135,7 @@
                   <input type="text" name="allergyDescription" id="allergyDescription" x-model="allergy_description"
                      @input="saveFormData()">
                </div>
-               <div class="form-row">
+               <div class="form-row" style="margin-bottom: 0.4rem;">
                   <input type="checkbox" name="hasDisability" id="hasDisability" x-model="hasDisability" @change="saveFormData()">
                   <label for="hasDisability"> One or more guests have a disability</label>
                </div>
@@ -145,10 +146,10 @@
                </div>
             </div>
          </div>
-         <div class="form-group">
+         <div class="form-group" x-show="activeFormPage.id == 4">
             <div class="form-group-title">
                <h3>Special Instructions</h3>
-               <p>Leave special instructions on how to handle your reservation.</p>
+               <p class="libre-baskerville-regular subtitle">Leave special instructions on how to handle your reservation.</p>
             </div>
             <div class="form-group-content">
                <div class="form-control">
@@ -162,7 +163,31 @@
          <div class="form-error" x-show="error">
             <p x-text="error"></p>
          </div>
-         <div class="form-control form-action">
+         <div class="back-next" style="flex-direction: row; gap: 0.4rem;">
+            <!-- Back Button -->
+            <button type="button" class="back-button josefin-sans-regular" @click="goBack(activeFormPage)"
+               x-show="activeFormPage.id > 0" style="padding: 0.3rem; cursor: pointer; ">
+               Back
+            </button>
+         
+            <!-- Next Button -->
+            <button type="button" class="next-button josefin-sans-regular"
+               x-show="!isLastPage() && checkFormPageFull(activeFormPage.id)" @click="goNext(activeFormPage)"
+               style="padding: 0.3rem; cursor: pointer; ">
+               Next
+            </button>
+         
+            <!-- Submit Button -->
+            <button type="submit" class="submit-button josefin-sans-regular"
+               x-show="isLastPage() && checkFormPageFull(activeFormPage.id)" :disabled="loading"
+               style="padding: 0.3rem; cursor: pointer; ">
+               <span x-show="!loading">Request Reservation</span>
+               <span x-show="loading">
+                  <span class="loading-spinner"></span> Processing...
+               </span>
+            </button>
+         </div>
+         <!-- <div class="form-control form-action">
             <button type="submit" class="submit-button"
                :disabled="!(firstNameValid && lastNameValid && emailValid && phoneValid && eventNameValid && dateValid) || loading">
                <span x-show="!loading">Request Reservation</span>
@@ -172,10 +197,10 @@
             </button>
             <div
                x-show="!(firstNameValid && lastNameValid && emailValid && phoneValid && eventNameValid && dateValid) && (first_name || last_name || email || phone_number || event || date)"
-               style="color: red; margin-top: 10px;">
+               style="color: red; margin-top: 10px;" class="subtitle">
                Please fix the highlighted fields before submitting
             </div>
-         </div>
+         </div> -->
       </form>
    </section>
 </body>
