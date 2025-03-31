@@ -1,9 +1,3 @@
-routerAdd("GET", "/", (e) => {
-  const html = $template.loadFiles(`${__hooks}/views/booking.html`).render();
-
-  return e.html(200, html);
-});
-
 onRecordCreateRequest((e) => {
   e.next();
 
@@ -15,13 +9,13 @@ onRecordCreateRequest((e) => {
     to: [{ address: e.record.email() }],
     subject: "Reservation Received",
     html: `
-      <h3>Hello</h3></br>
-      <p>Your Reservation was received successfully. We'll stay in touch on the progress.</p></br>
-      <p>Thank You.</p>
-    `,
+       <h3>Hello</h3></br>
+       <p>Your Reservation was received successfully. We'll stay in touch on the progress.</p></br>
+       <p>Thank You.</p>
+     `,
     // bcc, cc and custom headers are also supported...
   });
 
-  console.log(e.record.email());
   e.app.newMailClient().send(message);
+  console.log(`Email sent to ${e.record.email()}`);
 }, "reservations_requests");
