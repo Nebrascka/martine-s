@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Book a reservation</title>
+   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+   <link rel="stylesheet" href="/css/style.css">
+   <script src="/js/booking.page.js"></script>
+</head>
+
+<body>
+   <section class="header">
+      <h1>Martine's</h1>
+   </section>
+   <section class="form-section">
+      <div class="form-header">
+         <h3>Request Reservation</h3>
+         <p>Add your details to request a reservation with us. We get back to you within 2-3 business days regarding the
+            status of your request.</p>
+      </div>
+      
+      <!-- Success message that appears after form submission -->
+      <div x-data="reservationPage" x-show="success" class="success-message">
+         <div class="success-content">
+            <h3>Reservation Request Submitted!</h3>
+            <p>Thank you for your reservation request. We will get back to you within 2-3 business days regarding the status
+               of your request.</p>
+            <button @click="resetForm" class="btn">Make Another Reservation</button>
+         </div>
+      </div>
+      <form id="reservationForm" class="request-form" method="post" x-data="reservationPage" @submit.prevent="submitForm">
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>User Information</h3>
+               <p>Enter your details to create a reservation</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-row">
+                  <div class="form-control">
+                     <label for="firstName">First Name*</label>
+                     <input type="text" name="firstName" id="firstName" x-model="first_name"
+                        @input="firstNameValid = validateName(first_name)"
+                        :class="{ 'invalid': first_name && !firstNameValid, 'valid': first_name && firstNameValid }">
+                     <small x-show="first_name && !firstNameValid" style="color: red;">Please enter a valid name
+                        (letters only)</small>
+                  </div>
+                  <div class="form-control">
+                     <label for="lastName">Last Name*</label>
+                     <input type="text" name="lastName" id="lastName" x-model="last_name"
+                        @input="lastNameValid = validateName(last_name)"
+                        :class="{ 'invalid': last_name && !lastNameValid, 'valid': last_name && lastNameValid }">
+                     <small x-show="last_name && !lastNameValid" style="color: red;">Please enter a valid name (letters
+                        only)</small>
+                  </div>
+               </div>
+               <div class="form-control">
+                  <label for="email">Email*</label>
+                  <input type="email" name="email" id="email" x-model="email" @input="emailValid = validateEmail(email)"
+                     :class="{ 'invalid': email && !emailValid, 'valid': email && emailValid }">
+                  <small x-show="email && !emailValid" style="color: red;">Please enter a valid email address</small>
+               </div>
+               <div class="form-control">
+                  <label for="phoneNumber">Phone Number</label>
+                  <input type="tel" name="phoneNumber" id="phoneNumber" x-model="phone_number"
+                     @input="phoneValid = validatePhone(phone_number)"
+                     :class="{ 'invalid': phone_number && !phoneValid, 'valid': phone_number && phoneValid }">
+                  <small x-show="phone_number && !phoneValid" style="color: red;">Please enter a valid phone number
+                     (e.g., 123-456-7890)</small>
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Event Information</h3>
+               <p>Enter details about the occasion</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-control">
+                  <label for="eventName">Event Name*</label>
+                  <input type="text" name="eventName" id="eventName" x-model="event"
+                     @input="eventNameValid = validateEventName(event)"
+                     :class="{ 'invalid': event && !eventNameValid, 'valid': event && eventNameValid }">
+                  <small x-show="event && !eventNameValid" style="color: red;">Please enter a valid event name (2-100
+                     characters)</small>
+               </div>
+               <div class="form-control">
+                  <label for="eventDate">Date*</label>
+                  <input type="date" name="eventDate" id="eventDate" x-model="date"
+                     @input="dateValid = validateDate(date)"
+                     :class="{ 'invalid': date !== undefined && !dateValid, 'valid': date && dateValid }">
+                  <small x-show="date !== undefined && !dateValid" style="color: red;">Please select a date</small>
+               </div>
+               <div class="form-control">
+                  <label for="eventDescription">Event Description</label>
+                  <textarea name="eventDescription" id="eventDescription" rows="10"
+                     x-model="event_description" @input="saveFormData()"></textarea>
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Guest Information</h3>
+               <p>Enter details about the guests</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-control">
+                  <label for="numAdults">Number of Adults</label>
+                  <input type="number" name="numAdults" id="numAdults" min="1" value="1" x-model="adults" @change="saveFormData()">
+               </div>
+               <div class="form-row">
+                  <input type="checkbox" name="hasChildren" id="hasChildren" x-model="hasChildren" @change="saveFormData()">
+                  <label for="hasChildren"> I have Children</label>
+               </div>
+               <div class="form-control" x-show="hasChildren">
+                  <label for="numChildren">Number of Children</label>
+                  <input type="number" name="numChildren" id="numChildren" min="0" value="0" x-model="children" @change="saveFormData()">
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Additional Information</h3>
+               <p>These details help us make your experience better.</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-row">
+                  <input type="checkbox" name="hasAllergy" id="hasAllergy" x-model="hasAllergy" @change="saveFormData()">
+                  <label for="hasAllergy"> One or more guests have an allergy</label>
+               </div>
+               <div class="form-control" x-show="hasAllergy">
+                  <label for="allergyDescription">Please Specify</label>
+                  <input type="text" name="allergyDescription" id="allergyDescription" x-model="allergy_description"
+                     @input="saveFormData()">
+               </div>
+               <div class="form-row">
+                  <input type="checkbox" name="hasDisability" id="hasDisability" x-model="hasDisability" @change="saveFormData()">
+                  <label for="hasDisability"> One or more guests have a disability</label>
+               </div>
+               <div class="form-control" x-show="hasDisability">
+                  <label for="disabilityDescription">Please Specify</label>
+                  <input type="text" name="disabilityDescription" id="disabilityDescription"
+                     x-model="disability_description" @input="saveFormData()">
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+            <div class="form-group-title">
+               <h3>Special Instructions</h3>
+               <p>Leave special instructions on how to handle your reservation.</p>
+            </div>
+            <div class="form-group-content">
+               <div class="form-control">
+                  <label for="specialInstructions">Special Instructions</label>
+                  <textarea name="specialInstructions" id="specialInstructions" rows="10"
+                     x-model="special_instructions" @input="saveFormData()"></textarea>
+               </div>
+            </div>
+         </div>
+         <!-- Error message -->
+         <div class="form-error" x-show="error">
+            <p x-text="error"></p>
+         </div>
+         <div class="form-control form-action">
+            <button type="submit" class="submit-button"
+               :disabled="!(firstNameValid && lastNameValid && emailValid && phoneValid && eventNameValid && dateValid) || loading">
+               <span x-show="!loading">Request Reservation</span>
+               <span x-show="loading">
+                  <span class="loading-spinner"></span> Processing...
+               </span>
+            </button>
+            <div
+               x-show="!(firstNameValid && lastNameValid && emailValid && phoneValid && eventNameValid && dateValid) && (first_name || last_name || email || phone_number || event || date)"
+               style="color: red; margin-top: 10px;">
+               Please fix the highlighted fields before submitting
+            </div>
+         </div>
+      </form>
+   </section>
+</body>
+
+</html>

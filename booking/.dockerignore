@@ -1,0 +1,4 @@
+# flyctl launch added from db\.gitignore
+db\**\pb_data
+fly.toml
+public

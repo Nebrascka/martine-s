@@ -7,6 +7,7 @@
     <link href="https://fonts.cdnfonts.com/css/bernier-distressed" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/gistesy" rel="stylesheet">
     <script src="script.js" defer></script>
+    <script src="/booking/submit-reservation.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martine's Bar & Grill</title>
@@ -148,7 +149,7 @@
                     <h2>Enter your details here to reserve a table</h2>
                 </div>
                 <div class="mail-form">
-                    <form action="/action_page.php">
+                    <form id="reservationForm">
                         <div class="user-name">
                             <div class="first">
                                 <label for="fname"  class="form-lables">First name:</label><br>
@@ -159,20 +160,20 @@
                                 <input type="text" class="entry comms names"id="lname" name="lname" placeholder="Doe"><br><br>
                             </div>
                         </div>
-                        <label for="fname" class="form-lables">Email:</label><br>
-                        <input type="text" class="entry comms" id="fname" name="fname" placeholder="johndoe@gmail.com"><br><br>
+                        <label for="email" class="form-lables">Email:</label><br>
+                        <input type="email" class="entry comms" id="email" name="email" placeholder="johndoe@gmail.com"><br><br>
 
-                        <label for="fname" class="form-lables">Phone:</label><br>
-                        <input type="text" class="entry comms" id="fname" name="fname" placeholder="+44 678484778"><br><br>
+                        <label for="phone_number" class="form-lables">Phone:</label><br>
+                        <input type="tel" class="entry comms" id="phone_number" name="phone_number" placeholder="+44 678484778"><br><br>
 
                         <div class="user-name">
                             <div class="first">
-                                <label for="fname" class="form-lables">Reservation Date:</label><br>
-                                <input type="text" class="entry comms names" id="fname" name="fname" placeholder="5th JUNE 2025">
+                                <label for="date" class="form-lables">Reservation Date:</label><br>
+                                <input type="datetime" class="entry comms names" id="date" name="date" placeholder="5th JUNE 2025">
                             </div>
                             <div class="last">
-                                <label for="lname" class="form-lables">Number of Guests:</label><br>
-                                <input type="text" class="entry comms names"id="lname" name="lname" placeholder="5"><br><br>
+                                <label for="number_of_guests" class="form-lables">Number of Guests:</label><br>
+                                <input type="number" class="entry comms names" id="number_of_guests" name="number_of_guests" placeholder="5"><br><br>
                             </div>
                         </div>                        
                         
