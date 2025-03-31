@@ -37,6 +37,80 @@ document.addEventListener("alpine:init", () => {
     eventNameValid: false,
     dateValid: false,
 
+    // today
+    today: null,
+
+    // form pages
+    formPages: [
+      {
+        id: 0,
+        full: false,
+      },
+      {
+        id: 1,
+        full: false,
+      },
+      {
+        id: 2,
+        full: false,
+      },
+      {
+        id: 3,
+        full: false,
+      },
+      {
+        id: 4,
+        full: false,
+      },
+    ],
+
+    activeFormPage: {
+      id: 0,
+      full: false,
+    },
+
+    goBack(page) {
+      const pageIndex = page.id - 1 < 0 ? 0 : page.id - 1;
+      this.activeFormPage = this.formPages[pageIndex];
+    },
+
+    goNext(page) {
+      // Check if the current form page is full
+      const isCurrentPageFull = this.checkFormPageFull(page.id);
+      if (isCurrentPageFull) {
+        this.formPages[page.id].full = true;
+        const pageIndex =
+          page.id + 1 > this.formPages.length - 1 ? page.id : page.id + 1;
+        this.activeFormPage = this.formPages[pageIndex];
+      }
+    },
+
+    checkFormPageFull(pageId) {
+      // Add logic to check if all inputs in the current form page are filled
+      switch (pageId) {
+        case 0:
+          return (
+            this.firstNameValid &&
+            this.lastNameValid &&
+            this.emailValid &&
+            this.phoneValid
+          );
+        case 1:
+          return this.eventNameValid && this.dateValid;
+        case 2:
+          return this.adults > 0 && (!this.hasChildren || this.children >= 0);
+        case 3:
+          return true; // Additional information is optional
+        case 4:
+          return true; // Special instructions are optional
+        default:
+          return false;
+      }
+    },
+
+    isLastPage() {
+      return this.activeFormPage.id === this.formPages.length - 1;
+    },
     // Toggle navigation/modal
     open: false,
     toggleOpen() {
@@ -185,6 +259,8 @@ document.addEventListener("alpine:init", () => {
       const year = today.getFullYear();
       const month = String(today.getMonth() + 1).padStart(2, "0");
       const day = String(today.getDate()).padStart(2, "0");
+      this.date = `${year}-${month}-${day}`;
+      this.dateValid = this.validateDate(this.date);
 
       // Set minimum date attribute on date input
       const dateInput = document.getElementById("eventDate");
