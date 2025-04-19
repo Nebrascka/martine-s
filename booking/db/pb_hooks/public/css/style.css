@@ -20,6 +20,10 @@ button {
   cursor: pointer;
 }
 
+li {
+  list-style: none;
+}
+
 .josefin-sans-regular {
   font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;

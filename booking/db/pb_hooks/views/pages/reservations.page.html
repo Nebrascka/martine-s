@@ -21,7 +21,10 @@
                <td><input type="checkbox" name="isMarked" id=""></td>
                <td>
                   <p class="customer-name" x-text="reservation.first_name + ' ' + reservation.last_name"></p>
-                  <p class="customer-contact" x-text="reservation.email + ' | ' + reservation.phone_number"></p>
+                  <div class="customer-contact" style="font-size: .7rem;" style="display: flex; gap: .4rem;">
+                     <a :href="'mailto:'+reservation.email" x-text="reservation.email"></a>
+                     <a style="color: #000;" :href="#" x-text="' | '+reservation.phone_number"></a>
+                  </div>
                </td>
                <td>
                   <p class="event-name" style="cursor:pointer; color:#007bff; text-decoration:underline;"
@@ -70,7 +73,10 @@
                   <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Created By:</p>
                   <div>
                      <p style="font-size: .7rem;" x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
-                     <p style="font-size: .7rem;" x-text="selectedReservation.email + ' | ' + selectedReservation.phone_number"></p>
+                     <div style="font-size: .7rem;" style="display: flex; gap: .4rem;">
+                        <a :href="'mailto:'+selectedReservation.email" x-text="selectedReservation.email"></a>
+                        <a style="color: #000;" :href="#" x-text="' | '+selectedReservation.phone_number"></a>
+                     </div>
                      </div>
                      </div>
                <div class="view-event-guests">
@@ -96,11 +102,11 @@
                <div class="event-created-by">
                   <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Special Instructions:</p>
                   <div>
-                     <p style="font-size: .7rem;" x-text="selectedReservation.special_instructions"></p>
+                     <p style="font-size: .7rem;" x-html="selectedReservation.special_instructions"></p>
                   </div>
                </div>
                <div class="view-reservation-form-footer">
-                  <button type="submit" style="background-color: #4caf50; width: 100%; border: none; padding: .6rem;">
+                  <button type="submit" style="background-color: #f0e447; width: 100%; border: none; padding: .6rem;">
                      Approve Reservation
                   </button>
                </div>
