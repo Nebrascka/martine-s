@@ -23,7 +23,7 @@ routerAdd("POST", "/dashboard/reservations/{id}", (e) => {
   if (!reservation) {
     return e.json(404, { error: "Reservation not found" });
   }
-  reservation.set("status", "accepted");
+  reservation.set("reservation_status", "accepted");
   e.app.save(reservation);
 
   return e.redirect(302, "/dashboard/reservations");

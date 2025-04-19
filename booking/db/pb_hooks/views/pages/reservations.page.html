@@ -69,7 +69,7 @@
                   <p class="view-event-description" x-text="selectedReservation.event_description"></p>
                </div>
                <div class="event-created-by">
-                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Created By:</p>
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Requested By:</p>
                   <div>
                      <p style="font-size: .7rem;" x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
                      <div style="font-size: .7rem;" style="display: flex; gap: .4rem;">
@@ -105,8 +105,14 @@
                   </div>
                </div>
                <div class="view-reservation-form-footer">
-                  <button type="submit" style="background-color: #f0e447; width: 100%; border: none; padding: .6rem;">
+                  <button type="submit" x-show="selectedReservation.reservation_status === 'received'"
+                     style="background-color: #f0e447; width: 100%; border: none; padding: .6rem;">
                      Approve Reservation
+                  </button>
+                  <button type="submit" x-show="selectedReservation.reservation_status === 'accepted'"
+                     :disabled="selectedReservation.reservation_status === 'accepted'"
+                     style="background-color: #ccc; color:#888; width: 100%; border: none; padding: .6rem;">
+                     Reservation Accepted
                   </button>
                </div>
             </form>
