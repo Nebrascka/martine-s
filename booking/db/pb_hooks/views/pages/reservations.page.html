@@ -9,23 +9,16 @@
       <thead>
          <tr>
             <th><input type="checkbox" name="isAllMarked"></th>
-            <th>Requested By</th>
             <th>Event</th>
             <th>Check-In Date</th>
             <th>Number of Guests</th>
+            <th>Requested By</th>
          </tr>
       </thead>
       <tbody>
          <template x-for="(reservation, index) in reservations" :key="reservation.id">
             <tr>
                <td><input type="checkbox" name="isMarked" id=""></td>
-               <td>
-                  <p class="customer-name" x-text="reservation.first_name + ' ' + reservation.last_name"></p>
-                  <div class="customer-contact" style="font-size: .7rem;" style="display: flex; gap: .4rem;">
-                     <a :href="'mailto:'+reservation.email" x-text="reservation.email"></a>
-                     <a style="color: #000;" :href="#" x-text="' | '+reservation.phone_number"></a>
-                  </div>
-               </td>
                <td>
                   <p class="event-name" style="cursor:pointer; color:#007bff; text-decoration:underline;"
                      @click="openDialog(reservation)">
@@ -39,6 +32,13 @@
                   <p class="total-guests" x-text="reservation.number_of_guests  + ' Total Guests'"></p>
                   <p class="adults" x-text="reservation.adults + ' Adult(s)'"></p>
                   <p class="children" x-text="reservation.children + ' Children'"></p>
+               </td>
+               <td>
+                  <p class="customer-name" x-text="reservation.first_name + ' ' + reservation.last_name"></p>
+                  <div class="customer-contact" style="font-size: .7rem;" style="display: flex; gap: .4rem;">
+                     <a :href="'mailto:'+reservation.email" x-text="reservation.email"></a>
+                     <a style="color: #000;" x-text="' | '+reservation.phone_number"></a>
+                  </div>
                </td>
             </tr>
          </template>
@@ -55,8 +55,7 @@
                style="background-color: #fff; border: none;">X</button>
          </div>
          <template x-if="selectedReservation">
-            <form action="/accept" class="view-reservation-dialog-form" method="POST">
-               <input type="hidden" name="reservaionId" :value="selectedReservation.id">
+            <form :action="'/dashboard/reservations/' + selectedReservation.id" class="view-reservation-dialog-form" method="POST">
                <div class="view-event-header">
                   <div class="view-event-header-content">
                      <h3 x-text="selectedReservation.event"></h3>
@@ -75,7 +74,7 @@
                      <p style="font-size: .7rem;" x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
                      <div style="font-size: .7rem;" style="display: flex; gap: .4rem;">
                         <a :href="'mailto:'+selectedReservation.email" x-text="selectedReservation.email"></a>
-                        <a style="color: #000;" :href="#" x-text="' | '+selectedReservation.phone_number"></a>
+                        <a style="color: #000;" x-text="' | '+selectedReservation.phone_number"></a>
                      </div>
                      </div>
                      </div>
