@@ -1,7 +1,7 @@
 {{define "content"}}
 <div class="page-header">
    <h1 class="josefin-sans-regular">Reservations</h1>
-   <p class="josefin-sans-regular" style="color: #888;">View, Update reservations and manage all reservations.</p>
+   <p class="josefin-sans-regular" style="color: #888;">View, Update and manage all reservations.</p>
 </div>
 
 <div x-data="reservationsPage({{.reservations}})">
@@ -28,9 +28,10 @@
                      @click="openDialog(reservation)">
                      <span x-text="reservation.event"></span>
                   </p>
-                  <p class="event-desc" x-text="reservation.event_description"></p>
+                  <p class="event-desc" x-text="reservation.event_description"
+                     style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 14rem;"></p>
                </td>
-               <td x-text="reservation.date"></td>
+               <td x-text="formatDate(reservation.date)"></td>
                <td>
                   <p class="total-guests" x-text="reservation.number_of_guests  + ' Total Guests'"></p>
                   <p class="adults" x-text="reservation.adults + ' Adult(s)'"></p>
@@ -47,46 +48,61 @@
       <div class="reservaion-dialog-info">
          <div class="view-reservation-dialog-header">
             <p class="view-reservation-dialog-title">View Event</p>
-            <button class="close-dialog-btn" @click="closeDialog()" type="button">Close</button>
+            <button class="close-dialog-btn" @click="closeDialog()" type="button"
+               style="background-color: #fff; border: none;">X</button>
          </div>
          <template x-if="selectedReservation">
             <form action="/accept" class="view-reservation-dialog-form" method="POST">
-               <div class="view-reservation-form-content">
-                  <div class="form-control">
-                     <label for="event-name">Event Name:</label>
-                     <input type="text" id="event-name" name="event" x-model="selectedReservation.event" readonly>
+               <input type="hidden" name="reservaionId" :value="selectedReservation.id">
+               <div class="view-event-header">
+                  <div class="view-event-header-content">
+                     <h3 x-text="selectedReservation.event"></h3>
+                     <p style="display: flex; gap: .8rem;">
+                        <span class="date" x-text="formatDate(selectedReservation.date)"></span>
+                        <span class="number-of-people" x-text="selectedReservation.number_of_guests + ' Guests'"></span>
+                     </p>
                   </div>
-                  <div class="form-control">
-                     <label for="event-date">Date:</label>
-                     <input type="text" id="event-date" name="date" x-model="selectedReservation.date" readonly>
-                  </div>
-                  <div class="form-control">
-                     <label for="event-desc">Event Description:</label>
-                     <textarea type="text" id="event-desc" name="event-desc"
-                        x-model="selectedReservation.event_description" readonly></textarea>
-                  </div>
-                  <div class="form-control">
-                     <label for="creator" style="margin-bottom: .4rem; font-size: .8rem;">Created By:</label>
-                     <div>
-                        <p style="font-size: .7rem;"
-                           x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
-                        <p style="font-size: .7rem;"
-                           x-text="selectedReservation.email + ' | ' + selectedReservation.phone_number"></p>
+               </div>
+               <div class="event-description">
+                  <p class="view-event-description" x-text="selectedReservation.event_description"></p>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Created By:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.email + ' | ' + selectedReservation.phone_number"></p>
                      </div>
-                  </div>
-                  <div class="form-control">
-                     <label for="number-of-guests" x-text="'Number Of Guests: ' + selectedReservation.number_of_guests"
-                        style="margin-bottom: .4rem; font-size: .8rem;"></label>
-                     <div>
-                        <p style="font-size: .7rem;" x-text="selectedReservation.adults + ' Adult(s)'"></p>
-                        <p style="font-size: .7rem;" x-text="selectedReservation.children + ' Children'"></p>
                      </div>
+               <div class="view-event-guests">
+                  <p class="view-events-number-of-guests" x-text="'Number Of Guests: ' + selectedReservation.number_of_guests"
+                     style="margin-bottom: .4rem; font-size: .8rem;"></p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.adults + ' Adult(s)'"></p>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.children + ' Children'"></p>
+                  </div>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Food Alergy Information:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.allergy_description"></p>
+                  </div>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Disability Information:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.disabiity_description"></p>
+                  </div>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Special Instructions:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.special_instructions"></p>
                   </div>
                </div>
                <div class="view-reservation-form-footer">
-                  <button type="submit"
-                     style="background-color: #4caf50; width: 100%; border: none; padding: .6rem;">Accept
-                     Invitation</button>
+                  <button type="submit" style="background-color: #4caf50; width: 100%; border: none; padding: .6rem;">
+                     Approve Reservation
+                  </button>
                </div>
             </form>
          </template>

@@ -20,7 +20,7 @@ routerAdd(
 routerAdd(
   "GET",
   "/img/{path...}",
-  $apis.static($os.dirFS(`${__hooks}/public/js/`), false)
+  $apis.static($os.dirFS(`${__hooks}/public/img/`), false)
 );
 
 routerAdd("GET", "/dashboard", (e) => {
