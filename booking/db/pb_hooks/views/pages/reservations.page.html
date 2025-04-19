@@ -1,0 +1,97 @@
+{{define "content"}}
+<div class="page-header">
+   <h1 class="josefin-sans-regular">Reservations</h1>
+   <p class="josefin-sans-regular" style="color: #888;">View, Update reservations and manage all reservations.</p>
+</div>
+
+<div x-data="reservationsPage({{.reservations}})">
+   <table class="reservations-table josefin-sans-regular">
+      <thead>
+         <tr>
+            <th><input type="checkbox" name="isAllMarked"></th>
+            <th>Requested By</th>
+            <th>Event</th>
+            <th>Check-In Date</th>
+            <th>Number of Guests</th>
+         </tr>
+      </thead>
+      <tbody>
+         <template x-for="(reservation, index) in reservations" :key="reservation.id">
+            <tr>
+               <td><input type="checkbox" name="isMarked" id=""></td>
+               <td>
+                  <p class="customer-name" x-text="reservation.first_name + ' ' + reservation.last_name"></p>
+                  <p class="customer-contact" x-text="reservation.email + ' | ' + reservation.phone_number"></p>
+               </td>
+               <td>
+                  <p class="event-name" style="cursor:pointer; color:#007bff; text-decoration:underline;"
+                     @click="openDialog(reservation)">
+                     <span x-text="reservation.event"></span>
+                  </p>
+                  <p class="event-desc" x-text="reservation.event_description"></p>
+               </td>
+               <td x-text="reservation.date"></td>
+               <td>
+                  <p class="total-guests" x-text="reservation.number_of_guests  + ' Total Guests'"></p>
+                  <p class="adults" x-text="reservation.adults + ' Adult(s)'"></p>
+                  <p class="children" x-text="reservation.children + ' Children'"></p>
+               </td>
+            </tr>
+         </template>
+      </tbody>
+   </table>
+
+   <!-- Custom Modal Dialog -->
+   <div x-show="modalOpen && selectedReservation" x-cloak @keydown.escape.window="closeDialog()"
+      class="reservation-dialog-backdrop" x-transition>
+      <div class="reservaion-dialog-info">
+         <div class="view-reservation-dialog-header">
+            <p class="view-reservation-dialog-title">View Event</p>
+            <button class="close-dialog-btn" @click="closeDialog()" type="button">Close</button>
+         </div>
+         <template x-if="selectedReservation">
+            <form action="/accept" class="view-reservation-dialog-form" method="POST">
+               <div class="view-reservation-form-content">
+                  <div class="form-control">
+                     <label for="event-name">Event Name:</label>
+                     <input type="text" id="event-name" name="event" x-model="selectedReservation.event" readonly>
+                  </div>
+                  <div class="form-control">
+                     <label for="event-date">Date:</label>
+                     <input type="text" id="event-date" name="date" x-model="selectedReservation.date" readonly>
+                  </div>
+                  <div class="form-control">
+                     <label for="event-desc">Event Description:</label>
+                     <textarea type="text" id="event-desc" name="event-desc"
+                        x-model="selectedReservation.event_description" readonly></textarea>
+                  </div>
+                  <div class="form-control">
+                     <label for="creator" style="margin-bottom: .4rem; font-size: .8rem;">Created By:</label>
+                     <div>
+                        <p style="font-size: .7rem;"
+                           x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
+                        <p style="font-size: .7rem;"
+                           x-text="selectedReservation.email + ' | ' + selectedReservation.phone_number"></p>
+                     </div>
+                  </div>
+                  <div class="form-control">
+                     <label for="number-of-guests" x-text="'Number Of Guests: ' + selectedReservation.number_of_guests"
+                        style="margin-bottom: .4rem; font-size: .8rem;"></label>
+                     <div>
+                        <p style="font-size: .7rem;" x-text="selectedReservation.adults + ' Adult(s)'"></p>
+                        <p style="font-size: .7rem;" x-text="selectedReservation.children + ' Children'"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="view-reservation-form-footer">
+                  <button type="submit"
+                     style="background-color: #4caf50; width: 100%; border: none; padding: .6rem;">Accept
+                     Invitation</button>
+               </div>
+            </form>
+         </template>
+      </div>
+   </div>
+</div>
+<script src="/js/reservations.page.js"></script>
+{{end}}
