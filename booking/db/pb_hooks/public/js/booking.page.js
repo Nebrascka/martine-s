@@ -218,6 +218,7 @@ document.addEventListener("alpine:init", () => {
               ? this.disability_description
               : "",
             special_instructions: this.special_instructions,
+            reservation_status: "received",
           };
 
           console.log(reservation);
