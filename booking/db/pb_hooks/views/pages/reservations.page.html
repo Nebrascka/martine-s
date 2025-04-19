@@ -1,0 +1,124 @@
+{{define "content"}}
+<div class="page-header">
+   <h1 class="josefin-sans-regular">Reservations</h1>
+   <p class="josefin-sans-regular" style="color: #888;">View, Update and manage all reservations.</p>
+</div>
+
+<div x-data="reservationsPage({{.reservations}})">
+   <table class="reservations-table josefin-sans-regular">
+      <thead>
+         <tr>
+            <th><input type="checkbox" name="isAllMarked"></th>
+            <th>Event</th>
+            <th>Check-In Date</th>
+            <th>Number of Guests</th>
+            <th>Requested By</th>
+         </tr>
+      </thead>
+      <tbody>
+         <template x-for="(reservation, index) in reservations" :key="reservation.id">
+            <tr>
+               <td><input type="checkbox" name="isMarked" id=""></td>
+               <td>
+                  <p class="event-name" style="cursor:pointer; color:#007bff; text-decoration:underline;"
+                     @click="openDialog(reservation)">
+                     <span x-text="reservation.event"></span>
+                  </p>
+                  <p class="event-desc" x-text="reservation.event_description"
+                     style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 14rem;"></p>
+               </td>
+               <td x-text="formatDate(reservation.date)"></td>
+               <td>
+                  <p class="total-guests" x-text="reservation.number_of_guests  + ' Total Guests'"></p>
+                  <p class="adults" x-text="reservation.adults + ' Adult(s)'"></p>
+                  <p class="children" x-text="reservation.children + ' Children'"></p>
+               </td>
+               <td>
+                  <p class="customer-name" x-text="reservation.first_name + ' ' + reservation.last_name"></p>
+                  <div class="customer-contact" style="font-size: .7rem;" style="display: flex; gap: .4rem;">
+                     <a :href="'mailto:'+reservation.email" x-text="reservation.email"></a>
+                     <a style="color: #000;" x-text="' | '+reservation.phone_number"></a>
+                  </div>
+               </td>
+            </tr>
+         </template>
+      </tbody>
+   </table>
+
+   <!-- Custom Modal Dialog -->
+   <div x-show="modalOpen && selectedReservation" x-cloak @keydown.escape.window="closeDialog()"
+      class="reservation-dialog-backdrop" x-transition>
+      <div class="reservaion-dialog-info">
+         <div class="view-reservation-dialog-header">
+            <p class="view-reservation-dialog-title">View Event</p>
+            <button class="close-dialog-btn" @click="closeDialog()" type="button"
+               style="background-color: #fff; border: none;">X</button>
+         </div>
+         <template x-if="selectedReservation">
+            <form :action="'/dashboard/reservations/' + selectedReservation.id" class="view-reservation-dialog-form" method="POST">
+               <div class="view-event-header">
+                  <div class="view-event-header-content">
+                     <h3 x-text="selectedReservation.event"></h3>
+                     <p style="display: flex; gap: .8rem;">
+                        <span class="date" x-text="formatDate(selectedReservation.date)"></span>
+                        <span class="number-of-people" x-text="selectedReservation.number_of_guests + ' Guests'"></span>
+                     </p>
+                  </div>
+               </div>
+               <div class="event-description">
+                  <p class="view-event-description" x-text="selectedReservation.event_description"></p>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Requested By:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.first_name + ' ' + selectedReservation.last_name"></p>
+                     <div style="font-size: .7rem;" style="display: flex; gap: .4rem;">
+                        <a :href="'mailto:'+selectedReservation.email" x-text="selectedReservation.email"></a>
+                        <a style="color: #000;" x-text="' | '+selectedReservation.phone_number"></a>
+                     </div>
+                     </div>
+                     </div>
+               <div class="view-event-guests">
+                  <p class="view-events-number-of-guests" x-text="'Number Of Guests: ' + selectedReservation.number_of_guests"
+                     style="margin-bottom: .4rem; font-size: .8rem;"></p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.adults + ' Adult(s)'"></p>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.children + ' Children'"></p>
+                  </div>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Food Alergy Information:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.allergy_description"></p>
+                  </div>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Disability Information:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-text="selectedReservation.disabiity_description"></p>
+                  </div>
+               </div>
+               <div class="event-created-by">
+                  <p class="view-event-creator" style="margin-bottom: .4rem; font-size: .8rem;">Special Instructions:</p>
+                  <div>
+                     <p style="font-size: .7rem;" x-html="selectedReservation.special_instructions"></p>
+                  </div>
+               </div>
+               <div class="view-reservation-form-footer">
+                  <button type="submit" x-show="selectedReservation.reservation_status === 'received'"
+                     style="background-color: #f0e447; width: 100%; border: none; padding: .6rem;">
+                     Approve Reservation
+                  </button>
+                  <button type="submit" x-show="selectedReservation.reservation_status === 'accepted'"
+                     :disabled="selectedReservation.reservation_status === 'accepted'"
+                     style="background-color: #ccc; color:#888; width: 100%; border: none; padding: .6rem;">
+                     Reservation Accepted
+                  </button>
+               </div>
+            </form>
+         </template>
+      </div>
+   </div>
+</div>
+<script src="/js/reservations.page.js"></script>
+{{end}}

@@ -15,7 +15,8 @@ document.addEventListener("alpine:init", () => {
     // Guest Information
     adults: 1,
     hasChildren: false,
-    children: 1,
+    children: 0,
+    number_of_guests: 0,
 
     // Additional Information
     hasAllergy: false,
@@ -152,7 +153,7 @@ document.addEventListener("alpine:init", () => {
       this.event_description = "";
       this.adults = 1;
       this.hasChildren = false;
-      this.children = 1;
+      this.children = 0;
       this.hasAllergy = false;
       this.allergy_description = "";
       this.hasDisability = false;
@@ -168,6 +169,9 @@ document.addEventListener("alpine:init", () => {
 
       this.success = false;
       this.error = null;
+
+      this.activeFormPage = this.formPages[0]; // Reset to the first page
+      this.success = false;
     },
 
     // Form submission handler
@@ -191,7 +195,6 @@ document.addEventListener("alpine:init", () => {
         try {
           this.loading = true;
           this.error = null;
-
           const reservation = {
             first_name: this.first_name,
             last_name: this.last_name,
@@ -203,6 +206,9 @@ document.addEventListener("alpine:init", () => {
             adults: this.adults,
             hasChildren: this.hasChildren,
             children: this.hasChildren ? this.children : 0,
+            number_of_guests:
+              parseInt(this.adults) +
+              parseInt(this.hasChildren ? this.children : 0),
             hasAllergy: this.hasAllergy,
             allergy_description: this.hasAllergy
               ? this.allergy_description
@@ -214,6 +220,7 @@ document.addEventListener("alpine:init", () => {
             special_instructions: this.special_instructions,
           };
 
+          console.log(reservation);
           const res = await fetch(
             "/api/collections/reservations_requests/records",
             {
@@ -236,11 +243,8 @@ document.addEventListener("alpine:init", () => {
 
           // Show success message
           this.success = true;
-
-          // Reset form after 5 seconds
-          setTimeout(() => {
-            this.resetForm();
-          }, 5000);
+          this.resetForm();
+          this.activeFormPage = { id: 0, full: false };
         } catch (err) {
           console.error("Error submitting reservation:", err);
           this.error =
