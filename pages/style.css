@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 
-
+  
 *{
     /* outline: red .7px solid; */
 }
@@ -46,8 +46,19 @@ button:hover{
 }
 
 /* nav */
-
-
+#navbar-placeholder{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    background-color: transparent;
+}
+#navbar-placeholder.scrolled {
+    background-color: #ffffff; /* or any color you prefer */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* optional shadow */
+  }
 /* home */
 .slideshow-container {
     height: 100%;
@@ -93,7 +104,7 @@ button:hover{
 
 .banner{
     text-align: center;
-    padding-top: 1rem;
+    padding-top: 6rem;
     padding-bottom: 2.15rem;
      
     
